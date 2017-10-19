@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6385F961-E136-426D-9A2F-E25AE3A31FC9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.Ctrip.Soa.Caravan</RootNamespace>
+    <AssemblyName>Caravan</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Caravan.Collections\Caravan.Collections.csproj">
+      <Project>{B3320204-E9EB-4FD2-AB0E-0064E56A7E4F}</Project>
+      <Name>Caravan.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caravan.Configuration\Caravan.Configuration.csproj">
+      <Project>{9180CF34-805E-479E-A447-4E0431426F64}</Project>
+      <Name>Caravan.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caravan.Logging\Caravan.Logging.csproj">
+      <Project>{092B287E-F510-4894-B1B8-FFF4C53F7EF7}</Project>
+      <Name>Caravan.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caravan.Metric\Caravan.Metric.csproj">
+      <Project>{39AD6257-686E-4D31-92D4-516599A203F2}</Project>
+      <Name>Caravan.Metric</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caravan.Ribbon\Caravan.Ribbon.csproj">
+      <Project>{B23C620E-D867-4CAA-8824-ED20DF99C267}</Project>
+      <Name>Caravan.Ribbon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caravan.Threading\Caravan.Threading.csproj">
+      <Project>{7D632B0E-4295-42BF-BF41-C615449CDFDF}</Project>
+      <Name>Caravan.Threading</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>ren Caravan.dll Caravan.Temp.dll &amp; del /f /s /q Caravan.pdb &amp; del /f /s /q merge.log &amp; "$(SolutionDir)..\Tools\ILMerge\ILMerge.exe" /xmldocs /target:library /targetplatform:v4 /log /out:Caravan.dll Caravan.Temp.dll Caravan.Collections.dll Caravan.Common.dll Caravan.Configuration.dll Caravan.Logging.dll Caravan.Metric.dll Caravan.Ribbon.dll Caravan.Threading.dll &gt; merge.log &amp; del /f /s /q Caravan.Temp.*</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
